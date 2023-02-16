@@ -1,2 +1,2 @@
-# rapid-aid
+# RapidAid
 Keep calm and trust us
