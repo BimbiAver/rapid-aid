@@ -1,0 +1,2 @@
+{"component":"auth-service","level":"info","message":"Server started in port : 3000!","timestamp":"2023-02-20T16:34:40.643Z"}
+{"component":"auth-service","level":"info","message":"Session connected","sessionID":"vdfv232r2","timestamp":"2023-02-20T16:34:40.644Z"}
