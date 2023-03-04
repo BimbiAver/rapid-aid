@@ -13,6 +13,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: [true, 'Sorry, the NIC number already exists!'],
+      uppercase: true,
     },
     firstName: {
       type: String,

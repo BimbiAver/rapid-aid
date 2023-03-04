@@ -8,6 +8,7 @@ const adminSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      uppercase: true,
     },
     name: {
       type: String,
