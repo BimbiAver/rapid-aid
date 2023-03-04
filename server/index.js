@@ -13,7 +13,7 @@ const httpLogger = require('./utils/httpLogger');
 // const departmentRoutes = require('./routes/auth.routes');
 // const stationRoutes = require('./routes/auth.routes');
 // const caseRoutes = require('./routes/auth.routes');
-// const authRoutes = require('./routes/auth.routes');
+const userAuthRoutes = require('./routes/user-auth.routes');
 
 // const { isLoggedIn } = require('./middleware/auth.middleware');
 
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 // app.use('/api/departments', isLoggedIn, departmentRoutes);
 // app.use('/api/stations', isLoggedIn, stationRoutes);
 // app.use('/api/cases', isLoggedIn, caseRoutes);
-// app.use('/api/auth', authRoutes);
+app.use('/api/user-auth', userAuthRoutes);
 
 // Connect to the DB
 mongoose.set('strictQuery', true); // Fix the deprecation warning

@@ -52,7 +52,6 @@ const userSchema = new Schema(
       uppercase: true,
     },
     guardian: {
-      required: true,
       nicNo: String,
       fullName: String,
       address: String,
