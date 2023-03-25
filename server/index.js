@@ -5,7 +5,7 @@ const mongoose = require('mongoose'); // Manages data in MongoDB using queries
 const cors = require('cors'); // Enables CORS
 
 const logger = require('./utils/logger');
-const httpLogger = require('./utils/httpLogger');
+const httpLogger = require('./utils/http-logger');
 
 // Define routes
 // const userRoutes = require('./routes/note.routes');

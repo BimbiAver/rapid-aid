@@ -1,9 +1,16 @@
 require('dotenv').config();
 
-const bcrypt = require('bcryptjs'); // bcrypt for password-hashing
 const jwt = require('jsonwebtoken'); // JWT
 
 const User = require('../models/user.model');
+const OTP = require('../models/otp.model');
+
+const welcomeEmail = require('../services/welcome-email');
+const otpEmail = require('../services/otp-email');
+const { sendSMS } = require('../services/send-sms');
+
+const logger = require('../utils/logger');
+const { generateOTP } = require('../utils/generate-otp');
 
 let result = '';
 
@@ -33,8 +40,12 @@ const register = async (req, res) => {
     }
     // If everything is fine register the new user
     const user = await User.create(req.body);
-    // send new user as response
+    // Send welcome email
+    welcomeEmail.sendEmail(user.emailAddress, user.firstName);
+    // Send new user as response
     res.status(201).json(user);
+    // Logging
+    logger.authLogger.info('User registered', { nicNo: user.nicNo });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -43,32 +54,117 @@ const register = async (req, res) => {
 // User login
 const login = async (req, res) => {
   try {
-    // Check if the user is exist
-    const user = await User.findOne({ emailAddress: req.body.emailAddress });
-    if (user) {
-      // Check if password matches
-      const result = await bcrypt.compare(req.body.password, user.password);
-      if (result) {
-        // Sign the token and send it in response
-        const token = await jwt.sign(
-          {
-            userId: user._id,
-            firstName: user.firstName,
-            emailAddress: user.emailAddress,
-            role: user.role,
-          },
-          process.env.JWT_SECRET
-        );
-        res.json({ token });
+    // Login with email address
+    if (req.body.emailAddress) {
+      // Check if the user is exist
+      const user = await User.findOne({ emailAddress: req.body.emailAddress });
+      if (user) {
+        // Generate OTP
+        const otpCode = generateOTP();
+        // Save OTP in the DB
+        const otp = new OTP({
+          user: user._id,
+          emailOrMobile: user.emailAddress,
+          otp: otpCode,
+        });
+        await OTP.create(otp);
+        // Send OTP email
+        otpEmail.sendEmail(user.emailAddress, user.firstName, otpCode);
+        // Logging
+        logger.authLogger.info('The OTP sent to the email address', {
+          nicNo: user.nicNo,
+          emailAddress: user.emailAddress,
+        });
+        // Return response
+        return res
+          .status(200)
+          .json({ message: 'The OTP has been sent to your email address' });
       } else {
-        res.status(400).json({ error: 'Your password is invalid' });
+        return res.status(400).json({ error: 'No account found!' });
       }
-    } else {
-      res.status(400).json({ error: 'No account found' });
+    }
+    // Login with mobile no
+    if (req.body.mobileNo) {
+      // Check if the user is exist
+      const user = await User.findOne({ mobileNo: req.body.mobileNo });
+      if (user) {
+        // Generate OTP
+        const otpCode = generateOTP();
+        // Save OTP in the DB
+        const otp = new OTP({
+          user: user._id,
+          emailOrMobile: user.mobileNo,
+          otp: otpCode,
+        });
+        await OTP.create(otp);
+        // Send OTP SMS
+        sendSMS(
+          user.mobileNo,
+          `Hi ${user.firstName}, ${otpCode} is your OTP for login verification. - RapidAid`
+        );
+        // Logging
+        logger.authLogger.info('The OTP sent to the mobile number', {
+          nicNo: user.nicNo,
+          mobileNo: user.mobileNo,
+        });
+        // Return response
+        return res
+          .status(200)
+          .json({ message: 'The OTP has been sent to your mobile number' });
+      } else {
+        return res.status(400).json({ error: 'No account found!' });
+      }
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = { register, login };
+// Login verification
+const verify = async (req, res) => {
+  try {
+    const { emailOrMobile, otp } = req.body;
+    // Check if the user is exist
+    const user = await User.findOne({
+      $or: [{ emailAddress: emailOrMobile }, { mobileNo: emailOrMobile }],
+    });
+    if (user) {
+      // Get the last saved OTP
+      const lastOTP = await OTP.findOne({ emailOrMobile: emailOrMobile }).sort({
+        createdAt: -1,
+      });
+      // Check if the OTP is correct
+      if (otp == lastOTP.otp) {
+        // Sign the token and send it in response
+        const token = await jwt.sign(
+          {
+            userId: lastOTP.user,
+          },
+          process.env.JWT_SECRET,
+          { expiresIn: '12h' }
+        );
+        // Logging
+        logger.authLogger.info('OTP verified successfully', {
+          nicNo: user.nicNo,
+        });
+        // Return response
+        return res
+          .status(202)
+          .json({
+            message: 'OTP verified successfully!',
+            token: token,
+            userId: lastOTP.user,
+          });
+      } else {
+        return res.status(401).json({ error: 'Incorrect authentication!' });
+      }
+    } else {
+      return res.status(400).json({ error: 'No account found!' });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Export functions
+module.exports = { register, login, verify };
