@@ -30,12 +30,20 @@ app.use((req, res, next) => {
 });
 
 // Define route handlers
+
 // app.use('/api/users', isLoggedIn, userRoutes);
 // app.use('/api/admins', isLoggedIn, adminRoutes);
 // app.use('/api/departments', isLoggedIn, departmentRoutes);
 // app.use('/api/stations', isLoggedIn, stationRoutes);
 // app.use('/api/cases', isLoggedIn, caseRoutes);
 app.use('/api/user-auth', userAuthRoutes);
+app.use('/', async (req, res) => {
+  try {
+    return res.status(200).send("Hey I'm the homepage");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // Connect to the DB
 mongoose.set('strictQuery', true); // Fix the deprecation warning
