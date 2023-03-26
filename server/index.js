@@ -30,13 +30,6 @@ app.use((req, res, next) => {
 });
 
 // Define route handlers
-app.use('/', async (req, res) => {
-  try {
-    return res.status(200).send("Hey I'm the homepage");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
 // app.use('/api/users', isLoggedIn, userRoutes);
 // app.use('/api/admins', isLoggedIn, adminRoutes);
 // app.use('/api/departments', isLoggedIn, departmentRoutes);
