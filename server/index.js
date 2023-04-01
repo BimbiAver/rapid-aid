@@ -8,14 +8,14 @@ const logger = require('./utils/logger');
 const httpLogger = require('./utils/http-logger');
 
 // Define routes
-// const userRoutes = require('./routes/note.routes');
+const userRoutes = require('./routes/user.routes');
 // const adminRoutes = require('./routes/user.routes');
 // const departmentRoutes = require('./routes/auth.routes');
 // const stationRoutes = require('./routes/auth.routes');
 // const caseRoutes = require('./routes/auth.routes');
 const userAuthRoutes = require('./routes/user-auth.routes');
 
-// const { isLoggedIn } = require('./middleware/auth.middleware');
+const { isLoggedIn } = require('./middleware/auth.middleware');
 
 // Express app
 const app = express();
@@ -30,13 +30,12 @@ app.use((req, res, next) => {
 });
 
 // Define route handlers
-
-// app.use('/api/users', isLoggedIn, userRoutes);
+app.use('/api/user-auth', userAuthRoutes);
+app.use('/api/users', isLoggedIn, userRoutes);
 // app.use('/api/admins', isLoggedIn, adminRoutes);
 // app.use('/api/departments', isLoggedIn, departmentRoutes);
 // app.use('/api/stations', isLoggedIn, stationRoutes);
 // app.use('/api/cases', isLoggedIn, caseRoutes);
-app.use('/api/user-auth', userAuthRoutes);
 app.use('/', async (req, res) => {
   try {
     return res.status(200).send("Hey I'm the homepage");
