@@ -10,7 +10,7 @@ const httpLogger = require('./utils/http-logger');
 // Define routes
 const userRoutes = require('./routes/user.routes');
 // const adminRoutes = require('./routes/user.routes');
-// const departmentRoutes = require('./routes/auth.routes');
+const departmentRoutes = require('./routes/department.routes');
 // const stationRoutes = require('./routes/auth.routes');
 // const caseRoutes = require('./routes/auth.routes');
 const userAuthRoutes = require('./routes/user-auth.routes');
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 app.use('/api/user-auth', userAuthRoutes);
 app.use('/api/users', isLoggedIn, userRoutes);
 // app.use('/api/admins', isLoggedIn, adminRoutes);
-// app.use('/api/departments', isLoggedIn, departmentRoutes);
+app.use('/api/departments', isLoggedIn, departmentRoutes);
 // app.use('/api/stations', isLoggedIn, stationRoutes);
 // app.use('/api/cases', isLoggedIn, caseRoutes);
 app.use('/', async (req, res) => {
