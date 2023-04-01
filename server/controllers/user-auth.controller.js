@@ -80,7 +80,7 @@ const login = async (req, res) => {
           .status(200)
           .json({ message: 'The OTP has been sent to your email address' });
       } else {
-        return res.status(400).json({ error: 'No account found!' });
+        return res.status(404).json({ error: 'No account found!' });
       }
     }
     // Login with mobile no
@@ -112,7 +112,7 @@ const login = async (req, res) => {
           .status(200)
           .json({ message: 'The OTP has been sent to your mobile number' });
       } else {
-        return res.status(400).json({ error: 'No account found!' });
+        return res.status(404).json({ error: 'No account found!' });
       }
     }
   } catch (error) {
@@ -148,18 +148,16 @@ const verify = async (req, res) => {
           nicNo: user.nicNo,
         });
         // Return response
-        return res
-          .status(202)
-          .json({
-            message: 'OTP verified successfully!',
-            token: token,
-            userId: lastOTP.user,
-          });
+        return res.status(202).json({
+          message: 'OTP verified successfully!',
+          token: token,
+          userId: lastOTP.user,
+        });
       } else {
         return res.status(401).json({ error: 'Incorrect authentication!' });
       }
     } else {
-      return res.status(400).json({ error: 'No account found!' });
+      return res.status(404).json({ error: 'No account found!' });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
