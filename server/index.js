@@ -55,8 +55,6 @@ mongoose
       console.log(
         'Connected to the DB & listening on port ' + process.env.PORT
       );
-      logger.authLogger.info(`Server started in port : ${process.env.PORT}!`);
-      logger.authLogger.info('Session connected', { sessionID: 'vdfv232r2' });
     });
   })
   .catch((error) => {
