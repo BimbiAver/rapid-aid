@@ -24,6 +24,32 @@ const authLogger = createLogger({
   ],
 });
 
+// Logger for users
+const userLogger = createLogger({
+  defaultMeta: { component: 'user-service' },
+  transports: [
+    new transports.File({
+      level: 'info',
+      filename: 'logs/userLog.log',
+      format: loggerFormat,
+      handleExceptions: true,
+    }),
+  ],
+});
+
+// Logger for departments
+const departmentLogger = createLogger({
+  defaultMeta: { component: 'department-service' },
+  transports: [
+    new transports.File({
+      level: 'info',
+      filename: 'logs/departmentLog.log',
+      format: loggerFormat,
+      handleExceptions: true,
+    }),
+  ],
+});
+
 // Logger for cases
 const caseLogger = createLogger({
   defaultMeta: { component: 'case-service' },
@@ -51,6 +77,8 @@ const httpLogger = createLogger({
 // Export loggers
 module.exports = {
   authLogger: authLogger,
+  userLogger: userLogger,
+  departmentLogger: departmentLogger,
   caseLogger: caseLogger,
   httpLogger: httpLogger,
 };

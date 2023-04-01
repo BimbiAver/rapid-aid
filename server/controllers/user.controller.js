@@ -1,6 +1,8 @@
 const User = require('../models/user.model');
 const mongoose = require('mongoose');
 
+const logger = require('../utils/logger');
+
 // Get all users
 const getUsers = async (req, res) => {
   // Fetch all users
@@ -44,6 +46,9 @@ const deleteUser = async (req, res) => {
   }
   // Delete the user
   await User.findOneAndDelete({ _id: id });
+  // Logging
+  logger.userLogger.info('User deleted', { nicNo: user.nicNo });
+  // Return the response message
   return res.status(200).json({ message: 'User deleted successfully!' });
 };
 
@@ -65,6 +70,9 @@ const updateUser = async (req, res) => {
 
   // Update user details
   await User.findOneAndUpdate({ _id: id }, { ...req.body });
+  // Logging
+  logger.userLogger.info('User modified', { nicNo: user.nicNo });
+  // Return the response message
   return res.status(200).json({ message: 'User updated successfullly!' });
 };
 

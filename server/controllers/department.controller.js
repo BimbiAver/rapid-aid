@@ -2,6 +2,7 @@ const Department = require('../models/department.model');
 const mongoose = require('mongoose');
 
 const bcrypt = require('bcryptjs'); // bcrypt for password-hashing
+const logger = require('../utils/logger');
 
 // Get all departments
 const getDepartments = async (req, res) => {
@@ -38,6 +39,8 @@ const createDepartment = async (req, res) => {
     req.body.password = await bcrypt.hash(req.body.password, 10);
     // Create the new department
     const department = await Department.create(req.body);
+    // Logging
+    logger.departmentLogger.info('Department added', { name: department.name });
     // Send new department as response
     res.status(201).json(department);
   } catch (error) {
@@ -63,6 +66,9 @@ const deleteDepartment = async (req, res) => {
 
   // Delete the department
   await Department.findOneAndDelete({ _id: id });
+  // Logging
+  logger.departmentLogger.info('Department deleted', { name: department.name });
+  // Return the response message
   return res.status(200).json({ message: 'Department deleted successfully!' });
 };
 
@@ -88,6 +94,11 @@ const updateDepartment = async (req, res) => {
   }
   // Update department details
   await Department.findOneAndUpdate({ _id: id }, { ...req.body });
+  // Logging
+  logger.departmentLogger.info('Department modified', {
+    name: department.name,
+  });
+  // Return the response message
   return res.status(200).json({ message: 'Department updated successfullly!' });
 };
 
