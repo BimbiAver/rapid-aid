@@ -50,6 +50,19 @@ const departmentLogger = createLogger({
   ],
 });
 
+// Logger for stations
+const stationLogger = createLogger({
+  defaultMeta: { component: 'station-service' },
+  transports: [
+    new transports.File({
+      level: 'info',
+      filename: 'logs/stationLog.log',
+      format: loggerFormat,
+      handleExceptions: true,
+    }),
+  ],
+});
+
 // Logger for cases
 const caseLogger = createLogger({
   defaultMeta: { component: 'case-service' },
@@ -79,6 +92,7 @@ module.exports = {
   authLogger: authLogger,
   userLogger: userLogger,
   departmentLogger: departmentLogger,
+  stationLogger: stationLogger,
   caseLogger: caseLogger,
   httpLogger: httpLogger,
 };
