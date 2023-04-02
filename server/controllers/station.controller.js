@@ -7,9 +7,14 @@ const logger = require('../utils/logger');
 // Get all stations
 const getStations = async (req, res) => {
   // Fetch all stations
-  const stations = await Station.find({}, { password: 0 }).sort({
-    name: 1,
-  });
+  const stations = await Station.find({}, { password: 0 })
+    .sort({
+      name: 1,
+    })
+    .populate({
+      path: 'department',
+      select: { username: 0, password: 0 },
+    });
   return res.status(200).json(stations);
 };
 
@@ -24,7 +29,10 @@ const getStation = async (req, res) => {
   }
 
   // Fetch and check if the station exists or not
-  const station = await Station.findById(id, { password: 0 });
+  const station = await Station.findById(id, { password: 0 }).populate({
+    path: 'department',
+    select: { username: 0, password: 0 },
+  });
   if (!station) {
     return res.status(404).json({ error: 'No such station!' });
   }
