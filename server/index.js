@@ -13,7 +13,8 @@ const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
 const departmentRoutes = require('./routes/department.routes');
 const stationRoutes = require('./routes/station.routes');
-// const caseRoutes = require('./routes/auth.routes');
+const caseRoutes = require('./routes/case.routes');
+const medicalRoutes = require('./routes/medical.routes');
 
 const { isLoggedIn } = require('./middleware/auth.middleware');
 
@@ -36,6 +37,7 @@ app.use('/api/admins', isLoggedIn, adminRoutes);
 app.use('/api/departments', isLoggedIn, departmentRoutes);
 app.use('/api/stations', isLoggedIn, stationRoutes);
 // app.use('/api/cases', isLoggedIn, caseRoutes);
+app.use('/api/medicals', isLoggedIn, medicalRoutes);
 app.use('/', async (req, res) => {
   try {
     return res.status(200).send("Hey I'm the homepage");
