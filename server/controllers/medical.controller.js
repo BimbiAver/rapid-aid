@@ -27,7 +27,7 @@ const createMedical = async (req, res) => {
     const { id } = req.params;
 
     // Create the new medical
-    const medical = await User.update(
+    const medical = await User.updateOne(
       { _id: id },
       { $push: { medicalDetails: req.body } }
     );
@@ -70,7 +70,7 @@ const deleteMedical = async (req, res) => {
   }
 
   // Delete the medical
-  await User.update(
+  await User.updateOne(
     { _id: id },
     {
       $pull: {
