@@ -8,6 +8,7 @@ const logger = require('./utils/logger');
 const httpLogger = require('./utils/http-logger');
 
 // Define routes
+const authRoutes = require('./routes/auth.routes');
 const userAuthRoutes = require('./routes/user-auth.routes');
 const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
@@ -23,7 +24,7 @@ const app = express();
 
 // Middleware
 app.use(cors()); // Add CORS headers
-app.use(express.json()); // Parse requests (content-type - application/json)
+app.use(express.json({ limit: '20mb' })); // Parse requests (content-type - application/json)
 app.use(httpLogger); // Log HTTP requests and errors
 
 app.use((req, res, next) => {
@@ -31,12 +32,13 @@ app.use((req, res, next) => {
 });
 
 // Define route handlers
+app.use('/api/auth', authRoutes);
 app.use('/api/user-auth', userAuthRoutes);
 app.use('/api/users', isLoggedIn, userRoutes);
 app.use('/api/admins', isLoggedIn, adminRoutes);
 app.use('/api/departments', isLoggedIn, departmentRoutes);
 app.use('/api/stations', isLoggedIn, stationRoutes);
-// app.use('/api/cases', isLoggedIn, caseRoutes);
+app.use('/api/cases', isLoggedIn, caseRoutes);
 app.use('/api/medicals', isLoggedIn, medicalRoutes);
 app.use('/', async (req, res) => {
   try {

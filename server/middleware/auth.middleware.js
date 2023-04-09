@@ -12,8 +12,8 @@ const isLoggedIn = async (req, res, next) => {
       if (token) {
         const payload = await jwt.verify(token, process.env.JWT_SECRET);
         if (payload) {
-          // Stores the data in request object - userId
-          req.userId = payload;
+          // Stores the data in request object - user
+          req.user = payload;
           next();
         } else {
           res.status(401).json({ error: 'Token verification failed!' });
