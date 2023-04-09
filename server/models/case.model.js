@@ -26,13 +26,13 @@ const caseSchema = new Schema(
         ],
         message: '{VALUE} is not supported',
       },
+      default: 'New',
     },
     situation: {
       type: String,
       required: true,
     },
     departments: {
-      required: true,
       police: {
         assign: {
           type: Boolean,
@@ -131,7 +131,7 @@ const caseSchema = new Schema(
       type: String,
       required: true,
     },
-    images: [{ data: Buffer, contentType: String }],
+    images: [{ type: String }],
   },
   { timestamps: true }
 );
