@@ -6,16 +6,27 @@ const logger = require('../utils/logger');
 
 // Get all stations
 const getStations = async (req, res) => {
+  const { adminId, departmentId } = req.user; // Fetch IDs from the req.user property initialized by auth middleware
+
   // Fetch all stations
-  const stations = await Station.find({}, { password: 0 })
-    .sort({
-      name: 1,
-    })
-    .populate({
-      path: 'department',
-      select: { username: 0, password: 0 },
-    });
-  return res.status(200).json(stations);
+  if (adminId) {
+    // Fetch all stations
+    const stations = await Station.find({}, { password: 0 })
+      .sort({
+        name: 1,
+      })
+      .populate({
+        path: 'department',
+        select: { username: 0, password: 0 },
+      });
+    return res.status(200).json(stations);
+  }
+
+  // Fetch stations for a specific department
+  if (departmentId) {
+    const stations = await Station.find({ department: departmentId });
+    return res.status(200).json(stations);
+  }
 };
 
 // Get a specific station
