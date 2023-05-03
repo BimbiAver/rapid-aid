@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     // Navigate to the login screen after N seconds
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/welcome');
     });
   }
 
@@ -25,6 +25,7 @@ class _SplashState extends State<Splash> {
         backgroundColor: const Color(0xFFE01E37),
         elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Image.asset('assets/images/wave_red.png'),
