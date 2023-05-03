@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton(
                       // Navigate to the login screen
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/login');
+                        Navigator.pushNamed(context, '/otp_verification');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFE01E37),
