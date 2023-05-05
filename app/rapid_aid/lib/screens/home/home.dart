@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: _currentScreen == 0
           ? Column(
               children: [
@@ -163,7 +163,10 @@ class _HomeState extends State<Home> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, '/preventative_measures');
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Column(
