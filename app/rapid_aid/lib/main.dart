@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapid_aid/screens/help/help.dart';
 import 'package:rapid_aid/screens/home/home.dart';
 import 'package:rapid_aid/screens/login/login.dart';
 import 'package:rapid_aid/screens/otp_verification/otp_verification.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       // Hide debug banner
       debugShowCheckedModeBanner: false,
       // App routes
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/': (context) => const Splash(),
         '/welcome': (context) => const Welcome(),
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/otp_verification': (context) => const OTPVerification(),
         '/register': (context) => const Registration(),
         '/home': (context) => const Home(),
+        '/help': (context) => const Help(),
       },
     );
   }
