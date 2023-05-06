@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       // Hide debug banner
       debugShowCheckedModeBanner: false,
       // App routes
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
         '/': (context) => const Splash(),
         '/welcome': (context) => const Welcome(),

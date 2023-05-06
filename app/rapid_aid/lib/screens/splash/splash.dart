@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rapid_aid/utils/secure_storage.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -9,13 +10,30 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  // Create an instance of SecureStorge class
+  final _secureStorage = SecureStorage();
+
   @override
   void initState() {
     super.initState();
-    // Navigate to the login screen after N seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/welcome');
-    });
+
+    // Check whether the user is already logged in or not
+    checkToken();
+  }
+
+  // Check whether the user is already logged in or not
+  checkToken() async {
+    if (await _secureStorage.getToken() != null) {
+      // Navigate to the home screen after N seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, '/home');
+      });
+    } else {
+      // Navigate to the welcome screen after N seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, '/welcome');
+      });
+    }
   }
 
   @override
