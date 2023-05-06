@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rapid_aid/widgets/header.dart';
+import 'package:rapid_aid/widgets/logout_confirmation.dart';
 
 import '../help/help.dart';
 
@@ -28,7 +29,9 @@ class _HomeState extends State<Home> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              LogoutConfirmation().logoutConfirmationAlertDialog(context);
+            },
             icon: const Icon(Icons.logout),
             tooltip: 'Log Out',
           )

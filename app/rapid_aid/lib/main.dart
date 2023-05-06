@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rapid_aid/screens/help/help.dart';
 import 'package:rapid_aid/screens/home/home.dart';
 import 'package:rapid_aid/screens/login/login.dart';
@@ -17,6 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Disable device auto orientation and force portrait mode
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       // Hide debug banner
       debugShowCheckedModeBanner: false,

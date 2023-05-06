@@ -46,6 +46,11 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
+  final ScrollController _scrollController = ScrollController(
+    initialScrollOffset: 0.0,
+    keepScrollOffset: false,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +61,7 @@ class _RegistrationState extends State<Registration> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus
               ?.unfocus(), // Hide the soft keyboard
