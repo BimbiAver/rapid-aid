@@ -5,6 +5,7 @@ import 'package:rapid_aid/screens/home/home.dart';
 import 'package:rapid_aid/screens/login/login.dart';
 import 'package:rapid_aid/screens/otp_verification/otp_verification.dart';
 import 'package:rapid_aid/screens/preventative_measures/preventative_measures.dart';
+import 'package:rapid_aid/screens/profile/profile.dart';
 import 'package:rapid_aid/screens/registration/registration.dart';
 import 'package:rapid_aid/screens/splash/splash.dart';
 import 'package:rapid_aid/screens/welcome/welcome.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const Registration(),
         '/home': (context) => const Home(),
         '/preventative_measures': (context) => const PreventativeMeasures(),
+        '/profile': (context) => const Profile(),
         '/help': (context) => const Help(),
       },
     );

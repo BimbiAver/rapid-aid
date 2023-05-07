@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rapid_aid/config.dart';
-import 'package:rapid_aid/models/user_model.dart';
 
 class UserAuthApiService {
   Future login(String? emailAddress, String? mobileNo) async {

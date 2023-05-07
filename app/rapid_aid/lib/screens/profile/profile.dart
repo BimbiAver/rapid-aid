@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:rapid_aid/controllers/user_auth_controller.dart';
+import 'package:rapid_aid/controllers/user_controlller.dart';
+import 'package:rapid_aid/models/user_model.dart';
+import 'package:rapid_aid/widgets/header.dart';
 
-class Registration extends StatefulWidget {
-  const Registration({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<Registration> createState() => _RegistrationState();
+  State<Profile> createState() => _ProfileState();
 }
 
-enum ExtraTopping { yes, no }
-
-class _RegistrationState extends State<Registration> {
+class _ProfileState extends State<Profile> {
   String _gender = '';
   String? _bloodGroup;
   String? _relationship;
 
-  final _registrationFormKey = GlobalKey<FormState>();
+  late UserModel? _userModel;
+
+  final _profileFormKey = GlobalKey<FormState>();
 
   final _nicNoFormController = TextEditingController();
   final _firstNameFormController = TextEditingController();
@@ -44,6 +46,42 @@ class _RegistrationState extends State<Registration> {
     _guardianAddressFormController.dispose();
     _guardianContactNoFormController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      _getUser(); // Get user data
+    });
+  }
+
+  // Get user data
+  void _getUser() async {
+    _userModel = (await UserController().getUser(context: context));
+    _setUser(); // Set user data
+  }
+
+  // Set user data
+  void _setUser() {
+    setState(() {
+      _nicNoFormController.text = _userModel!.nicNo!;
+      _firstNameFormController.text = _userModel!.firstName!;
+      _lastNameFormController.text = _userModel!.lastName!;
+      _gender = _userModel!.gender!;
+      _dobFormController.text =
+          _userModel!.dob!.substring(0, _userModel!.dob!.indexOf('T'));
+      _addressFormController.text = _userModel!.address!;
+      _mobileNoFormController.text = _userModel!.mobileNo!.substring(3);
+      _emailAddressFormController.text = _userModel!.emailAddress!;
+      _bloodGroup = _userModel!.bloodGroup!;
+      _guardianNicNoFormController.text = _userModel!.guardian!.nicNo!;
+      _guardianFullNameFormController.text = _userModel!.guardian!.fullName!;
+      _guardianAddressFormController.text = _userModel!.guardian!.address!;
+      _guardianContactNoFormController.text =
+          _userModel!.guardian!.contactNo!.substring(3);
+      _relationship = _userModel!.guardian!.relationship!;
+    });
   }
 
   Future<void> _selectDob(BuildContext context) async {
@@ -98,46 +136,36 @@ class _RegistrationState extends State<Registration> {
               ?.unfocus(), // Hide the soft keyboard
           child: Column(
             children: [
-              Image.asset('assets/images/wave_red.png'),
+              const Header(),
+              const SizedBox(
+                height: 10,
+              ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Form(
-                  key: _registrationFormKey,
+                  key: _profileFormKey,
                   child: Column(
                     children: [
-                      Image.asset(
-                        'assets/images/logo_transparent.png',
-                        width: 220,
+                      const CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/user_avatar.png'),
+                        radius: 70,
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
                       const Text(
-                        'Create Your Account',
+                        'My Profile',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 19,
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "A few clicks away from creating your account. Please enter the info to proceed. We won't share your details with anyone.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          height: 1.3,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
                         height: 30,
                       ),
                       Container(
-                        height: 350,
+                        height: 370,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade600),
                             borderRadius:
@@ -156,6 +184,7 @@ class _RegistrationState extends State<Registration> {
                                 TextFormField(
                                   maxLines: 1,
                                   maxLength: 12,
+                                  readOnly: true,
                                   controller: _nicNoFormController,
                                   keyboardType: TextInputType.text,
                                   textInputAction: TextInputAction.next,
@@ -363,6 +392,7 @@ class _RegistrationState extends State<Registration> {
                                 TextFormField(
                                   maxLines: 1,
                                   maxLength: 9,
+                                  readOnly: true,
                                   controller: _mobileNoFormController,
                                   keyboardType: TextInputType.number,
                                   textInputAction: TextInputAction.next,
@@ -398,6 +428,7 @@ class _RegistrationState extends State<Registration> {
                                 TextFormField(
                                   maxLines: 1,
                                   maxLength: 50,
+                                  readOnly: true,
                                   controller: _emailAddressFormController,
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
@@ -698,8 +729,8 @@ class _RegistrationState extends State<Registration> {
                         child: ElevatedButton(
                           // Navigate to the login screen
                           onPressed: () async {
-                            if (_registrationFormKey.currentState!.validate()) {
-                              await UserAuthController().register(
+                            if (_profileFormKey.currentState!.validate()) {
+                              await UserController().updateUser(
                                 context: context,
                                 nicNo: _nicNoFormController.text,
                                 firstName: _firstNameFormController.text,
@@ -725,7 +756,7 @@ class _RegistrationState extends State<Registration> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFE01E37),
                           ),
-                          child: const Text('Register'),
+                          child: const Text('Update'),
                         ),
                       ),
                     ],
