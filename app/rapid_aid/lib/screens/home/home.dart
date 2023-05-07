@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xFFE01E37),
         elevation: 0,
         title: const Text(
-          'Hi, Deshan',
+          'Hi, welcome!',
           style: TextStyle(
             fontFamily: 'LemonJelly',
             fontSize: 32,

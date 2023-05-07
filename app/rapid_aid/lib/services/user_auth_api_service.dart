@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rapid_aid/config.dart';
+import 'package:rapid_aid/models/user_model.dart';
 
 class UserAuthApiService {
   Future login(String? emailAddress, String? mobileNo) async {
@@ -56,6 +57,27 @@ class UserAuthApiService {
         url,
         headers: {"Content-Type": "application/json"},
         body: body,
+      );
+
+      // Return the response
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future register(String userModelJson) async {
+    try {
+      // API
+      var url = Uri.parse(Config.userRegister);
+      // HTTP response
+      http.Response response;
+
+      // Send HTTP POST request
+      response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: userModelJson,
       );
 
       // Return the response
