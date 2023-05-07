@@ -241,22 +241,32 @@ class _MedicalDetailsState extends State<MedicalDetails> {
                         const SizedBox(
                           height: 20,
                         ),
-                        SizedBox(
-                          height: 350,
-                          child: Scrollbar(
-                            thumbVisibility: true, //always show scrollbar
-                            thickness: 3, //width of scrollbar
-                            scrollbarOrientation: ScrollbarOrientation.right,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: _medicalModel!
-                                    .map((medical) =>
-                                        medicalCard(medical, context))
-                                    .toList(),
+                        Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SizedBox(
+                              height: 330,
+                              child: Scrollbar(
+                                thumbVisibility: true, //always show scrollbar
+                                thickness: 3, //width of scrollbar
+                                scrollbarOrientation:
+                                    ScrollbarOrientation.right,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: _medicalModel!
+                                        .map((medical) =>
+                                            medicalCard(medical, context))
+                                        .toList(),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   )
