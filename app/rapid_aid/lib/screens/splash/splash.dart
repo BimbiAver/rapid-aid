@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rapid_aid/utils/secure_storage.dart';
 
 class Splash extends StatefulWidget {
@@ -16,9 +20,46 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    // Check connections and token
+    _checkConnections();
+  }
 
-    // Check whether the user is already logged in or not
-    checkToken();
+  void _checkConnections() async {
+    // Check whether the Internet connection is available
+    if (!await _checkNetwork()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('To continue, please connect to the Internet!'),
+        ),
+      );
+      // Exit app after 3 seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        exit(1);
+      });
+    } else if (!await Geolocator.isLocationServiceEnabled()) {
+      // Check whether the device location is enabled
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('To continue, please turn on device location!'),
+        ),
+      );
+      // Exit app after 3 seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        exit(1);
+      });
+    } else {
+      // Check whether the user is already logged in or not
+      checkToken();
+    }
+  }
+
+  Future<bool> _checkNetwork() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 
   // Check whether the user is already logged in or not

@@ -8,6 +8,9 @@ import 'package:rapid_aid/screens/otp_verification/otp_verification.dart';
 import 'package:rapid_aid/screens/preventative_measures/preventative_measures.dart';
 import 'package:rapid_aid/screens/profile/profile.dart';
 import 'package:rapid_aid/screens/registration/registration.dart';
+import 'package:rapid_aid/screens/report_case/case_details.dart';
+import 'package:rapid_aid/screens/report_case/select_department.dart';
+import 'package:rapid_aid/screens/report_case/select_situation.dart';
 import 'package:rapid_aid/screens/splash/splash.dart';
 import 'package:rapid_aid/screens/welcome/welcome.dart';
 
@@ -29,14 +32,17 @@ class MyApp extends StatelessWidget {
       // Hide debug banner
       debugShowCheckedModeBanner: false,
       // App routes
-      initialRoute: '/',
+      initialRoute: '/case_details',
       routes: {
-        '/': (context) => const Splash(),
+        // '/': (context) => const Splash(),
         '/welcome': (context) => const Welcome(),
         '/login': (context) => const Login(),
         '/otp_verification': (context) => const OTPVerification(),
         '/register': (context) => const Registration(),
         '/home': (context) => const Home(),
+        '/select_situation': (context) => const SelectSituation(),
+        '/select_department': (context) => const SelectDepartment(),
+        '/case_details': (context) => const CaseDetails(),
         '/medical_details': (context) => const MedicalDetails(),
         '/preventative_measures': (context) => const PreventativeMeasures(),
         '/profile': (context) => const Profile(),
