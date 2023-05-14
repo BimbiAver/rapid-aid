@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapid_aid/models/case_model.dart';
 import 'package:rapid_aid/widgets/header.dart';
 
 class SelectSituation extends StatefulWidget {
@@ -9,6 +10,16 @@ class SelectSituation extends StatefulWidget {
 }
 
 class _SelectSituationState extends State<SelectSituation> {
+  CaseModel caseModel = CaseModel();
+
+  // Select the situation and navigate to the next screen
+  void _selectSituation(String situation) {
+    caseModel.situation = situation;
+    Navigator.pushNamed(context, '/select_department', arguments: {
+      'caseModel': caseModel,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +58,9 @@ class _SelectSituationState extends State<SelectSituation> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            _selectSituation('Accident');
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
@@ -85,7 +98,9 @@ class _SelectSituationState extends State<SelectSituation> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            _selectSituation('Attack');
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
@@ -127,7 +142,9 @@ class _SelectSituationState extends State<SelectSituation> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            _selectSituation('Robbery');
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
@@ -165,7 +182,9 @@ class _SelectSituationState extends State<SelectSituation> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            _selectSituation('Kidnap');
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Row(
@@ -204,7 +223,9 @@ class _SelectSituationState extends State<SelectSituation> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _selectSituation('Medical Emergency');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
@@ -240,7 +261,9 @@ class _SelectSituationState extends State<SelectSituation> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _selectSituation('Sexual Harassment');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
@@ -276,7 +299,9 @@ class _SelectSituationState extends State<SelectSituation> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _selectSituation('Fire Incident');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
@@ -312,7 +337,9 @@ class _SelectSituationState extends State<SelectSituation> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _selectSituation('Natural Disaster');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
@@ -348,7 +375,9 @@ class _SelectSituationState extends State<SelectSituation> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _selectSituation('Other Incident');
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(

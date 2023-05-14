@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:rapid_aid/models/case_model.dart';
 import 'package:rapid_aid/utils/handle_location_permissions.dart';
 import 'package:rapid_aid/widgets/header.dart';
 
@@ -14,8 +15,13 @@ class CaseDetails extends StatefulWidget {
 class _CaseDetailsState extends State<CaseDetails> {
   late String _dateTime = '';
   late String _location = '';
+  late String _situation = '';
+  late String _department = '';
 
-  final _DateTimeController = TextEditingController();
+  late CaseModel caseModel;
+
+  // Store data coming from the previous screen
+  Map data = {};
 
   // Set DateTime
   void _setDateTime() {
@@ -41,15 +47,49 @@ class _CaseDetailsState extends State<CaseDetails> {
     }
   }
 
+  // Set data
+  void _setData() {
+    setState(() {
+      _setDateTime(); // Set DateTime
+      _setLocation(); // Fetch and set location
+      _situation = caseModel.situation!; // Set situation
+      _department = _getDepartment();
+    });
+  }
+
+  String _getDepartment() {
+    String department = '';
+    if (caseModel.departments?.police?.assign == true) {
+      department += 'Police, ';
+    }
+    if (caseModel.departments?.hospital?.assign == true) {
+      department += 'Hospital, ';
+    }
+    if (caseModel.departments?.fireBrigade?.assign == true) {
+      department += 'Fire Brigade, ';
+    }
+    if (caseModel.departments?.dmc?.assign == true) {
+      department += 'DMC, ';
+    }
+    if (caseModel.departments?.mwca?.assign == true) {
+      department += 'MWCA, ';
+    }
+    return department.substring(0, department.length - 2);
+  }
+
   @override
   void initState() {
     super.initState();
-    _setDateTime(); // Set DateTime
-    _setLocation(); // Fetch and set location
+    Future.delayed(Duration.zero, () {
+      caseModel = data['caseModel']; // Assign arguments
+      _setData(); // Set data
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    // Get arguments
+    data = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFE01E37),
@@ -104,35 +144,40 @@ class _CaseDetailsState extends State<CaseDetails> {
                           height: 20,
                         ),
                         Row(
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               'Situation:',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
-                            Text('Medical Emergency'),
+                            Text(_situation),
                           ],
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: const [
-                            Text(
-                              'Department(s):',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Wrap(
+                            runSpacing: 4.0,
+                            direction: Axis.horizontal,
+                            children: [
+                              const Text(
+                                'Department(s):',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text('Hospital, Police'),
-                          ],
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(_department),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,

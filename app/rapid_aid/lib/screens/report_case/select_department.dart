@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapid_aid/models/case_model.dart';
 import 'package:rapid_aid/widgets/header.dart';
 
 class SelectDepartment extends StatefulWidget {
@@ -13,10 +14,122 @@ class _SelectDepartmentState extends State<SelectDepartment> {
   bool _hospital = false;
   bool _fireBrigade = false;
   bool _dmc = false;
-  bool _wmca = false;
+  bool _mwca = false;
+
+  // Store data coming from the previous screen
+  Map data = {};
+
+  late CaseModel caseModel;
+
+  // Select department(s)
+  void _selectDepartment() {
+    switch (caseModel.situation) {
+      case 'Accident':
+        setState(() {
+          _hospital = true;
+          _police = true;
+        });
+        break;
+      case 'Attack':
+        setState(() {
+          _hospital = true;
+          _police = true;
+        });
+        break;
+      case 'Robbery':
+        setState(() {
+          _hospital = true;
+          _police = true;
+        });
+        break;
+      case 'Kidnap':
+        setState(() {
+          _hospital = true;
+          _police = true;
+        });
+        break;
+      case 'Medical Emergency':
+        setState(() {
+          _hospital = true;
+          _police = true;
+        });
+        break;
+      case 'Sexual Harassment':
+        setState(() {
+          _hospital = true;
+          _police = true;
+          _mwca = true;
+        });
+        break;
+      case 'Fire Incident':
+        setState(() {
+          _hospital = true;
+          _police = true;
+          _fireBrigade = true;
+        });
+        break;
+      case 'Natural Disaster':
+        setState(() {
+          _hospital = true;
+          _police = true;
+          _dmc = true;
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Select department(s) automatically
+    Future.delayed(Duration.zero, () {
+      caseModel = data['caseModel'];
+      _selectDepartment();
+    });
+  }
+
+  // Set departments
+  _setDepartment() {
+    Departments departments = Departments();
+    if (_police) {
+      Department police = Department();
+      police.assign = true;
+      police.status = 'New';
+      departments.police = police;
+    }
+    if (_hospital) {
+      Department hospital = Department();
+      hospital.assign = true;
+      hospital.status = 'New';
+      departments.hospital = hospital;
+    }
+    if (_fireBrigade) {
+      Department fireBrigade = Department();
+      fireBrigade.assign = true;
+      fireBrigade.status = 'New';
+      departments.fireBrigade = fireBrigade;
+    }
+    if (_dmc) {
+      Department dmc = Department();
+      dmc.assign = true;
+      dmc.status = 'New';
+      departments.dmc = dmc;
+    }
+    if (_mwca) {
+      Department mwca = Department();
+      mwca.assign = true;
+      mwca.status = 'New';
+      departments.mwca = mwca;
+    }
+    caseModel.departments = departments;
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Get arguments
+    data = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFE01E37),
@@ -106,10 +219,10 @@ class _SelectDepartmentState extends State<SelectDepartment> {
                               'MWCA - Ministry of Women and Child Affairs'),
                           controlAffinity: ListTileControlAffinity.leading,
                           checkColor: Colors.white,
-                          value: _wmca,
+                          value: _mwca,
                           onChanged: (bool? value) {
                             setState(() {
-                              _wmca = value!;
+                              _mwca = value!;
                             });
                           },
                           activeColor: const Color(0xFF03045E),
@@ -125,7 +238,14 @@ class _SelectDepartmentState extends State<SelectDepartment> {
                   width: 100,
                   child: ElevatedButton(
                     // Navigate to the login screen
-                    onPressed: () async {},
+                    onPressed: () {
+                      // Set departments on CaseModel
+                      _setDepartment();
+                      // Navigate to the Case Details screen
+                      Navigator.pushNamed(context, '/case_details', arguments: {
+                        'caseModel': caseModel,
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE01E37),
                     ),

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       // Hide debug banner
       debugShowCheckedModeBanner: false,
       // App routes
-      initialRoute: '/case_details',
+      initialRoute: '/home',
       routes: {
         // '/': (context) => const Splash(),
         '/welcome': (context) => const Welcome(),
