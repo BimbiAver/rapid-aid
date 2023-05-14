@@ -241,10 +241,25 @@ class _SelectDepartmentState extends State<SelectDepartment> {
                     onPressed: () {
                       // Set departments on CaseModel
                       _setDepartment();
-                      // Navigate to the Case Details screen
-                      Navigator.pushNamed(context, '/case_details', arguments: {
-                        'caseModel': caseModel,
-                      });
+                      // Validate checkboxes
+                      if (_police == true ||
+                          _hospital == true ||
+                          _fireBrigade == true ||
+                          _dmc == true ||
+                          _mwca == true) {
+                        // Navigate to the Case Details screen
+                        Navigator.pushNamed(context, '/case_details',
+                            arguments: {
+                              'caseModel': caseModel,
+                            });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please select at least one department!'),
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE01E37),

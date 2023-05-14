@@ -1,1 +1,35 @@
+import 'dart:developer';
 
+import 'package:http/http.dart' as http;
+import 'package:rapid_aid/config.dart';
+import 'package:rapid_aid/utils/secure_storage.dart';
+
+class CaseApiService {
+  // Create an instance of SecureStorge class
+  final _secureStorage = SecureStorage();
+
+  Future addCase(String caseModelJson) async {
+    try {
+      // API
+      var url = Uri.parse(Config.cases);
+      // HTTP response
+      http.Response response;
+
+      // Send HTTP GET request
+      response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${await _secureStorage.getToken()}',
+        },
+        body: caseModelJson,
+      );
+
+      // Return the response
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+}
