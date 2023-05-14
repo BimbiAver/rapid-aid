@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:rapid_aid/controllers/case_controller.dart';
 import 'package:rapid_aid/models/case_model.dart';
 import 'package:rapid_aid/utils/handle_location_permissions.dart';
+import 'package:rapid_aid/utils/manage_images.dart';
 import 'package:rapid_aid/widgets/header.dart';
 
 class CaseDetails extends StatefulWidget {
@@ -19,10 +20,14 @@ class _CaseDetailsState extends State<CaseDetails> {
   late String _situation = '';
   late String _department = '';
 
+  String _imageCount = 'Browse';
+
   late CaseModel caseModel;
 
   // Store data coming from the previous screen
   Map data = {};
+
+  List _images = [];
 
   final _detailsFormController = TextEditingController();
 
@@ -62,6 +67,7 @@ class _CaseDetailsState extends State<CaseDetails> {
     caseModel.dateTime = _dateTime;
     caseModel.location = _location;
     caseModel.details = _detailsFormController.text;
+    caseModel.images = _images.cast<String>();
   }
 
   String _getDepartment() {
@@ -98,6 +104,14 @@ class _CaseDetailsState extends State<CaseDetails> {
     // Clean up the controllers when the widget is disposed
     _detailsFormController.dispose();
     super.dispose();
+  }
+
+  // Browse images
+  void _browseImages() async {
+    _images = await ManageImages().browseImage() as List;
+    setState(() {
+      _imageCount = '${_images.length} selected';
+    });
   }
 
   @override
@@ -253,6 +267,41 @@ class _CaseDetailsState extends State<CaseDetails> {
                                 width: 15,
                               ),
                               Text(_location),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                'Image(s):',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  _browseImages();
+                                },
+                                child: Chip(
+                                  visualDensity: VisualDensity.compact,
+                                  label: Text(_imageCount),
+                                  deleteIcon: const Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                  ),
+                                  onDeleted: () {
+                                    _images.clear();
+                                    setState(() {
+                                      _imageCount = 'Browse';
+                                    });
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ],

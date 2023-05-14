@@ -49,5 +49,9 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to the gallery when open.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera when open.</string>
 </dict>
 </plist>

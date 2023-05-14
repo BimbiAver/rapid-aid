@@ -59,7 +59,8 @@ class CaseController {
       // Check the response and do the needful
       if (response.statusCode == 201) {
         Navigator.pop(context);
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/home', (Route<dynamic> route) => false);
         // Show successful message
         return ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
