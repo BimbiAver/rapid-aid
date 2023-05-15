@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rapid_aid/controllers/case_controller.dart';
 import 'package:rapid_aid/models/case_model.dart';
+import 'package:rapid_aid/widgets/case_cancel_confirmation.dart';
 import 'package:rapid_aid/widgets/case_image.dart';
 import 'package:rapid_aid/widgets/header.dart';
 
@@ -288,7 +289,13 @@ class _ViewCaseState extends State<ViewCase> {
                     width: 100,
                     child: ElevatedButton(
                       // Navigate to the login screen
-                      onPressed: () async {},
+                      onPressed: _status != 'New'
+                          ? null
+                          : () async {
+                              await CaseCancelConfirmation()
+                                  .caseCancelConfirmationAlertDialog(
+                                      context, _caseModel.id.toString());
+                            },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFE01E37),
                       ),

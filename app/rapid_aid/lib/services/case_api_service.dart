@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
@@ -72,6 +73,31 @@ class CaseApiService {
           'Accept': 'application/json',
           'Authorization': 'Bearer ${await _secureStorage.getToken()}',
         },
+      );
+
+      // Return the response
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future cancelCase(String caseId) async {
+    try {
+      // API
+      var url = Uri.parse('${Config.cases}/$caseId');
+      // HTTP response
+      http.Response response;
+
+      // Send HTTP GET request
+      response = await http.patch(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${await _secureStorage.getToken()}',
+        },
+        body: json.encode({'status': 'Cancelled'}),
       );
 
       // Return the response

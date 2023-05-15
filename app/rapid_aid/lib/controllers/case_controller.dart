@@ -186,4 +186,67 @@ class CaseController {
       log(e.toString());
     }
   }
+
+  Future cancelCase(
+      {required var context,
+      required String? caseId,
+      bool mounted = true}) async {
+    try {
+      // Display the loading dialog
+      showDialog(
+        // The user CANNOT close this dialog by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+
+      Response response =
+          await CaseApiService().cancelCase(caseId!) as http.Response;
+
+      // Close the loading dialog automatically
+      if (!mounted) return;
+      Navigator.of(context).pop();
+
+      // Decode the JSON response object
+      var data = jsonDecode(response.body);
+
+      // Check the response and do the needful
+      if (response.statusCode == 200) {
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pushNamed(context, '/cases');
+        // Show successful message
+        return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('The case cancelled successfully!'),
+          ),
+        );
+      } else {
+        return ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['error']),
+          ),
+        );
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
