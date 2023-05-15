@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:rapid_aid/screens/help/help.dart';
 import 'package:rapid_aid/screens/home/home.dart';
 import 'package:rapid_aid/screens/login/login.dart';
+import 'package:rapid_aid/screens/manage_cases/cases.dart';
 import 'package:rapid_aid/screens/medical_details/medical_details.dart';
 import 'package:rapid_aid/screens/otp_verification/otp_verification.dart';
 import 'package:rapid_aid/screens/preventative_measures/preventative_measures.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/select_situation': (context) => const SelectSituation(),
         '/select_department': (context) => const SelectDepartment(),
         '/case_details': (context) => const CaseDetails(),
+        '/cases': (context) => const Cases(),
         '/medical_details': (context) => const MedicalDetails(),
         '/preventative_measures': (context) => const PreventativeMeasures(),
         '/profile': (context) => const Profile(),

@@ -105,7 +105,9 @@ class _HomeState extends State<Home> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, '/cases');
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Column(

@@ -78,4 +78,57 @@ class CaseController {
       log(e.toString());
     }
   }
+
+  Future getCases({required var context, bool mounted = true}) async {
+    try {
+      // Display the loading dialog
+      showDialog(
+        // The user CANNOT close this dialog by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+
+      // Get medical data
+      Response response = await CaseApiService().getCases() as http.Response;
+
+      // Close the loading dialog automatically
+      if (!mounted) return;
+      Navigator.of(context).pop();
+
+      // Decode the JSON response object
+      var data = jsonDecode(response.body);
+
+      // Check the response and do the needful
+      if (response.statusCode == 200) {
+        // Convert JSON to a MedicalModel and return the response
+        List<CaseModel> _medicalModel = caseModelListFromJson(response.body);
+        return _medicalModel;
+      } else {
+        return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error'),
+          ),
+        );
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
