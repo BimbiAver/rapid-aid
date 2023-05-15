@@ -34,4 +34,10 @@ class ManageImages {
     // Return the base64 list
     return encodedImage;
   }
+
+  // Decode base64 image
+  Uint8List decodeBase64(var image) {
+    Uint8List decodedImage = base64.decode(image);
+    return decodedImage;
+  }
 }

@@ -13,7 +13,7 @@ Widget caseListCard(CaseModel singleCase, var context) {
 
   // Set colours for the status chip
   if (singleCase.status == 'New') {
-    statusBgColour = Color(0xFFE01E37);
+    statusBgColour = const Color(0xFFE01E37);
     statusFontColour = Colors.white;
   } else if (singleCase.status == 'Assigned' ||
       singleCase.status == 'Partially Assigned') {
@@ -88,7 +88,11 @@ Widget caseListCard(CaseModel singleCase, var context) {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () async {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/view_case', arguments: {
+                      'caseId': singleCase.id,
+                    });
+                  },
                   child: const Icon(
                     Icons.open_in_new,
                     color: Color(0xFF03045E),

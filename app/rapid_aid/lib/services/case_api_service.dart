@@ -56,4 +56,28 @@ class CaseApiService {
       log(e.toString());
     }
   }
+
+  Future getCase(String caseId) async {
+    try {
+      // API
+      var url = Uri.parse('${Config.cases}/$caseId');
+      // HTTP response
+      http.Response response;
+
+      // Send HTTP GET request
+      response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${await _secureStorage.getToken()}',
+        },
+      );
+
+      // Return the response
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

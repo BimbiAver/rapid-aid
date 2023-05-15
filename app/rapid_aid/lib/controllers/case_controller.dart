@@ -131,4 +131,59 @@ class CaseController {
       log(e.toString());
     }
   }
+
+  Future getCase(
+      {required var context, required var caseId, bool mounted = true}) async {
+    try {
+      // Display the loading dialog
+      showDialog(
+        // The user CANNOT close this dialog by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+
+      // Get case data
+      Response response =
+          await CaseApiService().getCase(caseId) as http.Response;
+
+      // Close the loading dialog automatically
+      if (!mounted) return;
+      Navigator.of(context).pop();
+
+      // Decode the JSON response object
+      var data = jsonDecode(response.body);
+
+      // Check the response and do the needful
+      if (response.statusCode == 200) {
+        // Convert JSON to a CaseModel and return the response
+        CaseModel _caseModel = caseModelFromJson(response.body);
+        return _caseModel;
+      } else {
+        return ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['error']),
+          ),
+        );
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
