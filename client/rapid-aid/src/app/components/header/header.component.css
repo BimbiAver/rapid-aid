@@ -1,0 +1,26 @@
+.navbar {
+  background-color: #e3ebff;
+}
+
+a.nav-link {
+  font-size: 18px;
+}
+
+.btn-logout {
+  background-color: #e01e37;
+  border-color: #e01e37;
+}
+
+.btn-logout:hover {
+  background-color: #03045e;
+  border-color: #03045e;
+}
+
+.navbar-nav a {
+  color: #03045e;
+}
+
+.navbar-nav > .active a {
+  color: #e01e37;
+  font-weight: 500;
+}

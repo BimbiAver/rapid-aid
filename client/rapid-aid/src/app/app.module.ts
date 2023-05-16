@@ -9,13 +9,21 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { MainComponent } from './layouts/main/main.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     LoginComponent,
-    Error404Component
+    Error404Component,
+    MainComponent,
+    FooterComponent,
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

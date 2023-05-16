@@ -24,7 +24,7 @@ export class AuthService {
       .subscribe({
         next: res => {
           localStorage.setItem('access_token', res.token);
-          this.router.navigate(['home']);
+          this.router.navigate(['dashboard']);
         },
         error: error => alert(error.error.error)
       });
@@ -41,8 +41,8 @@ export class AuthService {
     return authToken !== null ? true : false;
   }
 
-  // User signout
-  signout() {
+  // User logout
+  logout() {
     let removeToken = localStorage.removeItem('access_token');
     if (removeToken == null) {
       this.router.navigate(['auth/login']);
