@@ -6,6 +6,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { MainComponent } from './layouts/main/main.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard | RapidAid - Keep calm and trust us' },
+      { path: 'profile', component: ProfileComponent, title: 'Profile | RapidAid - Keep calm and trust us' },
       { path: '', redirectTo: "dashboard", pathMatch: "full" }
     ],
   },
