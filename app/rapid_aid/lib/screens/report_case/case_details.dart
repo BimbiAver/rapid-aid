@@ -255,19 +255,24 @@ class _CaseDetailsState extends State<CaseDetails> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              const Text(
-                                'Location:',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Wrap(
+                              runSpacing: 4.0,
+                              direction: Axis.horizontal,
+                              children: [
+                                const Text(
+                                  'Location:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Text(_location),
-                            ],
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Text(_location),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
