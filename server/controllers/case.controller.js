@@ -89,8 +89,8 @@ const createCase = async (req, res) => {
     // Create the new case
     const cases = await Case.create(req.body);
     // Get guardian contact no
-    const guardianContact = await User.find(
-      { _id: ObjectId(req.body.user) },
+    const guardianContact = await User.findById(
+      { _id: req.body.user },
       { 'guardian.contactNo': 1 }
     );
     // Send sms to guardian
