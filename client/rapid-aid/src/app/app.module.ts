@@ -14,6 +14,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminsComponent } from './components/admins/admins.component';
+import { DepartmentsComponent } from './components/departments/departments.component';
+import { StationsComponent } from './components/stations/stations.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     FooterComponent,
     DashboardComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminsComponent,
+    DepartmentsComponent,
+    StationsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,9 @@ import { MainComponent } from './layouts/main/main.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminsComponent } from './components/admins/admins.component';
+import { DepartmentsComponent } from './components/departments/departments.component';
+import { StationsComponent } from './components/stations/stations.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,9 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard | RapidAid - Keep calm and trust us' },
       { path: 'profile', component: ProfileComponent, title: 'Profile | RapidAid - Keep calm and trust us' },
+      { path: 'admins', component: AdminsComponent, title: 'Manage Admins | RapidAid - Keep calm and trust us' },
+      { path: 'departments', component: DepartmentsComponent, title: 'Manage Departments | RapidAid - Keep calm and trust us' },
+      { path: 'stations', component: StationsComponent, title: 'Manage Stations | RapidAid - Keep calm and trust us' },
       { path: '', redirectTo: "dashboard", pathMatch: "full" }
     ],
   },

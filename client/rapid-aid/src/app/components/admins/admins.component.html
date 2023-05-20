@@ -1,0 +1,40 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-user-gear mr-3"></i>Manage Admins</h4>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-create" name="btn-create-admin" routerLink="/create-admin">Create
+                admin</button>
+        </div>
+    </div>
+
+    <div class="admin-table">
+        <!-- Admin table -->
+        <table class="table table-bordered table-hover">
+            <caption>List of admins</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">NIC #</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contact No.</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Username</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let admin of admins">
+                    <td>{{ admin.nicNo }}</td>
+                    <td>{{ admin.name }}</td>
+                    <td>{{ admin.contactNo }}</td>
+                    <td>{{ admin.type }}</td>
+                    <td>{{ admin.username }}</td>
+                    <td><button type="button" class="btn btn-edit" name="btn-edit-admin"
+                            routerLink="/edit-admin">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

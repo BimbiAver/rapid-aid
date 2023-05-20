@@ -16,6 +16,11 @@ export class StationService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, public router: Router) { }
 
+  // Get stations
+  getStations() {
+    return this.http.get(`${STATION_API}`);
+  }
+
   // Get station data
   getStation(stationId: any): Observable<any> {
     let api = `${STATION_API}/${stationId}`;

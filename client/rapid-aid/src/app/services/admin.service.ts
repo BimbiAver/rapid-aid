@@ -16,6 +16,11 @@ export class AdminService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, public router: Router) { }
 
+  // Get admins
+  getAdmins() {
+    return this.http.get(`${ADMIN_API}`);
+  }
+
   // Get admin data
   getAdmin(adminId: any): Observable<any> {
     let api = `${ADMIN_API}/${adminId}`;

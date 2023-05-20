@@ -1,0 +1,45 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-user-gear mr-3"></i>Manage Stations</h4>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-add" name="btn-add-station" routerLink="/add-station">Add
+                station</button>
+        </div>
+    </div>
+
+    <div class="station-table">
+        <!-- Station table -->
+        <table class="table table-bordered table-hover">
+            <caption>List of stations</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col" *ngIf="this.jwtPayload.adminId">Department</th>
+                    <th scope="col">In-Charge</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Contact No.</th>
+                    <th scope="col">Username</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let station of stations">
+                    <td>{{ station.name }}</td>
+                    <td *ngIf="this.jwtPayload.adminId">{{ station.department.name }}</td>
+                    <td>{{ station.inCharge }}</td>
+                    <td>{{ station.address }}</td>
+                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ station.location }}"
+                            target="_blank">View</a></td>
+                    <td>{{ station.contactNo }}</td>
+                    <td>{{ station.username }}</td>
+                    <td><button type="button" class="btn btn-edit" name="btn-edit-station"
+                            routerLink="/edit-station">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

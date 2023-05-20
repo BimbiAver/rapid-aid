@@ -15,7 +15,21 @@
                 <a class="nav-link" routerLink="dashboard">Dashboard</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="notes">Notes</a>
+                <a class="nav-link" routerLink="cases">Cases</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="this.jwtPayload.adminId">
+                <a class="nav-link" routerLink="users">Users</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active"
+                *ngIf="this.jwtPayload.adminId && this.jwtPayload.role == 'Super Admin'">
+                <a class="nav-link" routerLink="admins">Admins</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="this.jwtPayload.adminId">
+                <a class="nav-link" routerLink="departments">Departments</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active"
+                *ngIf="this.jwtPayload.adminId || this.jwtPayload.departmentId">
+                <a class="nav-link" routerLink="stations">Stations</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="profile">Profile</a>

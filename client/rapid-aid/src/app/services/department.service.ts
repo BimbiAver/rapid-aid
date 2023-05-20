@@ -16,6 +16,11 @@ export class DepartmentService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, public router: Router) { }
 
+  // Get departments
+  getDepartments() {
+    return this.http.get(`${DEPARTMENT_API}`);
+  }
+
   // Get department data
   getDepartment(departId: any): Observable<any> {
     let api = `${DEPARTMENT_API}/${departId}`;

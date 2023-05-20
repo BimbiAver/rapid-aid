@@ -1,0 +1,18 @@
+.btn-add {
+  background-color: #e01e37;
+  color: #fff;
+}
+
+.station-table {
+  margin-top: 50px;
+}
+
+.btn-edit {
+  background-color: #03045e;
+  color: #fff;
+  font-size: 14px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

@@ -1,0 +1,38 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-building-columns mr-3"></i>Manage Departments</h4>
+        </div>
+    </div>
+
+    <div class="department-table">
+        <!-- Department table -->
+        <table class="table table-bordered table-hover">
+            <caption>List of departments</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">In-Charge</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact No.</th>
+                    <th scope="col">Username</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let department of departments">
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.category }}</td>
+                    <td>{{ department.inCharge }}</td>
+                    <td>{{ department.address }}</td>
+                    <td>{{ department.contactNo }}</td>
+                    <td>{{ department.username }}</td>
+                    <td><button type="button" class="btn btn-edit" name="btn-edit-department"
+                            routerLink="/edit-department">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
