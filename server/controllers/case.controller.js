@@ -11,13 +11,13 @@ const getCases = async (req, res) => {
 
   // Fetch cases for a specific user
   if (userId) {
-    const cases = await Case.find({ user: userId });
+    const cases = await Case.find({ user: userId }, { images: 0 });
     return res.status(200).json(cases);
   }
 
   // Fetch all cases
   if (adminId) {
-    const cases = await Case.find();
+    const cases = await Case.find({}, { images: 0 });
     return res.status(200).json(cases);
   }
 
@@ -25,42 +25,60 @@ const getCases = async (req, res) => {
   if (departmentId) {
     // For Police
     if (category == 'Police') {
-      const cases = await Case.find({ 'departments.police.assign': true });
+      const cases = await Case.find(
+        { 'departments.police.assign': true },
+        { images: 0 }
+      );
       return res.status(200).json(cases);
     }
     // For Hospital
     if (category == 'Hospital') {
-      const cases = await Case.find({ 'departments.hospital.assign': true });
+      const cases = await Case.find(
+        { 'departments.hospital.assign': true },
+        { images: 0 }
+      );
       return res.status(200).json(cases);
     }
     // For Fire Brigade
     if (category == 'Fire Brigade') {
-      const cases = await Case.find({ 'departments.fireBrigade.assign': true });
+      const cases = await Case.find(
+        { 'departments.fireBrigade.assign': true },
+        { images: 0 }
+      );
       return res.status(200).json(cases);
     }
     // For DMC
     if (category == 'DMC') {
-      const cases = await Case.find({ 'departments.dmc.assign': true });
+      const cases = await Case.find(
+        { 'departments.dmc.assign': true },
+        { images: 0 }
+      );
       return res.status(200).json(cases);
     }
     // For MWCA
     if (category == 'MWCA') {
-      const cases = await Case.find({ 'departments.mwca.assign': true });
+      const cases = await Case.find(
+        { 'departments.mwca.assign': true },
+        { images: 0 }
+      );
       return res.status(200).json(cases);
     }
   }
 
   // Fetch cases for a specific station
   if (stationId) {
-    const cases = await Case.find({
-      $or: [
-        { 'departments.police.station': stationId },
-        { 'departments.hospital.station': stationId },
-        { 'departments.fireBrigade.station': stationId },
-        { 'departments.dmc.station': stationId },
-        { 'departments.mwca.station': stationId },
-      ],
-    });
+    const cases = await Case.find(
+      {
+        $or: [
+          { 'departments.police.station': stationId },
+          { 'departments.hospital.station': stationId },
+          { 'departments.fireBrigade.station': stationId },
+          { 'departments.dmc.station': stationId },
+          { 'departments.mwca.station': stationId },
+        ],
+      },
+      { images: 0 }
+    );
     return res.status(200).json(cases);
   }
 };
