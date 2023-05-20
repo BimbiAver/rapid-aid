@@ -1,4 +1,5 @@
 const Case = require('../models/case.model');
+const User = require('../models/user.model');
 const mongoose = require('mongoose');
 
 const logger = require('../utils/logger');
@@ -89,12 +90,15 @@ const createCase = async (req, res) => {
     // Create the new case
     const cases = await Case.create(req.body);
     // Get guardian contact no
-    const guardianContact = await User.findById(
+    const user = await User.findById(
       { _id: req.body.user },
-      { 'guardian.contactNo': 1 }
+      { 'guardian.contactNo': 1, firstName: 1 }
     );
     // Send sms to guardian
-    sendSMS(guardianContact.guardian.contactNo, 'Test');
+    sendSMS(
+      user.guardian.contactNo,
+      `Emergency!!! ${user.firstName} has made an emergency case from the approx. location: https://www.google.com/maps/search/?api=1&query=${req.body.location} . You are receiving this message because ${user.firstName} has listed you as an emergency contact.\n- RapidAid -`
+    );
     // Logging
     logger.caseLogger.info('Case reported', {
       caseId: cases._id,
