@@ -2,6 +2,7 @@ const Case = require('../models/case.model');
 const mongoose = require('mongoose');
 
 const logger = require('../utils/logger');
+const { sendSMS } = require('../services/send-sms');
 
 // Get all cases
 const getCases = async (req, res) => {
@@ -87,6 +88,13 @@ const createCase = async (req, res) => {
   try {
     // Create the new case
     const cases = await Case.create(req.body);
+    // Get guardian contact no
+    const guardianContact = await User.findOne(
+      { _id: req.body.user },
+      { 'guardian.contactNo': 1 }
+    );
+    // Send sms to guardian
+    sendSMS(guardianContact, 'Test');
     // Logging
     logger.caseLogger.info('Case reported', {
       caseId: cases._id,
