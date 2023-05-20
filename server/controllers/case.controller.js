@@ -89,12 +89,12 @@ const createCase = async (req, res) => {
     // Create the new case
     const cases = await Case.create(req.body);
     // Get guardian contact no
-    const guardianContact = await User.findOne(
-      { _id: req.body.user },
+    const guardianContact = await User.find(
+      { _id: ObjectId(req.body.user) },
       { 'guardian.contactNo': 1 }
     );
     // Send sms to guardian
-    sendSMS(guardianContact, 'Test');
+    sendSMS(guardianContact.guardian.contactNo, 'Test');
     // Logging
     logger.caseLogger.info('Case reported', {
       caseId: cases._id,
