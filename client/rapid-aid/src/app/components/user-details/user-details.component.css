@@ -1,0 +1,38 @@
+.attribute {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 18px;
+}
+
+.section-title {
+  color: #03045e;
+  font-size: 21px;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+  .col-personal {
+    margin-right: 20px;
+  }
+
+  .col-guardian {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .col-guardian {
+    margin-top: 50px;
+  }
+}
+
+.medical-table {
+  margin-top: 50px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

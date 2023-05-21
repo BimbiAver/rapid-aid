@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 const USER_API = 'https://rapidaid.live/api/users';
 
@@ -16,6 +16,17 @@ export class UserService {
   // Get users
   getUsers() {
     return this.http.get(`${USER_API}`);
+  }
+
+  // Get user details
+  getUser(userId: any): Observable<any> {
+    let api = `${USER_API}/${userId}`;
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
   }
 
   // Error handling

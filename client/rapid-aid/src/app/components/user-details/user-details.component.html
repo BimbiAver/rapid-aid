@@ -1,1 +1,105 @@
-<p>user-details works!</p>
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4><i class="fa-solid fa-user mr-3"></i>User Details</h4>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Personal Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-personal">
+                <h5 class="section-title">Personal Details</h5>
+                <div class="mt-4">
+                    <p class="attribute d-inline mr-4">NIC No:</p>
+                    <p class="value d-inline">{{ user.nicNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">First Name:</p>
+                    <p class="value d-inline">{{ user.firstName }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Last Name:</p>
+                    <p class="value d-inline">{{ user.lastName }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Gender:</p>
+                    <p class="value d-inline">{{ user.gender }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Date of Birth:</p>
+                    <p class="value d-inline">{{ dob }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Address:</p>
+                    <p class="value d-inline">{{ user.address }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Mobile No:</p>
+                    <p class="value d-inline">{{ user.mobileNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Email Address:</p>
+                    <p class="value d-inline">{{ user.emailAddress }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Blood Group:</p>
+                    <p class="value d-inline">{{ user.bloodGroup }}</p>
+                </div>
+
+            </div>
+            <!-- Guardian Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-guardian">
+                <h5 class="section-title">Guardian Details</h5>
+                <div class="mt-4">
+                    <p class="attribute d-inline mr-4">NIC No:</p>
+                    <p class="value d-inline">{{ user?.guardian?.nicNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Full Name:</p>
+                    <p class="value d-inline">{{ user?.guardian?.fullName }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Address:</p>
+                    <p class="value d-inline">{{ user?.guardian?.address }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Contact No:</p>
+                    <p class="value d-inline">{{ user?.guardian?.contactNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Relationship:</p>
+                    <p class="value d-inline">{{ user?.guardian?.relationship }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5" *ngIf="user?.medicalDetails != ''">
+            <!-- Medical Details -->
+            <div class="col-sm shadow p-5 bg-white rounded">
+                <h5 class="section-title">Medical Details</h5>
+                <div class="medical-table">
+                    <!-- Medical table -->
+                    <table class="table table-bordered table-hover">
+                        <caption>List of medicals</caption>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Disease</th>
+                                <th scope="col">Since</th>
+                                <th scope="col">Under Treatments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medical of user.medicalDetails">
+                                <td>{{ medical.disease }}</td>
+                                <td>{{ medical.since.substring(0, medical.since.indexOf('T')) }}</td>
+                                <td>{{ medical.underTreatments }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
