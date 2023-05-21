@@ -24,13 +24,13 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard | RapidAid - Keep calm and trust us' },
       { path: 'profile', component: ProfileComponent, title: 'Profile | RapidAid - Keep calm and trust us' },
-      { path: 'admins', component: AdminsComponent, title: 'Manage Admins | RapidAid - Keep calm and trust us' },
-      { path: 'departments', component: DepartmentsComponent, title: 'Manage Departments | RapidAid - Keep calm and trust us' },
-      { path: 'stations', component: StationsComponent, title: 'Manage Stations | RapidAid - Keep calm and trust us' },
+      { path: 'admins', component: AdminsComponent, title: 'Manage Admins | RapidAid - Keep calm and trust us', data: { role: 'Super Admin' } },
+      { path: 'departments', component: DepartmentsComponent, title: 'Manage Departments | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
+      { path: 'stations', component: StationsComponent, title: 'Manage Stations | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin', 'Department'] } },
       { path: '', redirectTo: "dashboard", pathMatch: "full" }
     ],
   },
