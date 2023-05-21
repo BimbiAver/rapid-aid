@@ -11,13 +11,17 @@ const getCases = async (req, res) => {
 
   // Fetch cases for a specific user
   if (userId) {
-    const cases = await Case.find({ user: userId }, { images: 0 });
+    const cases = await Case.find({ user: userId }, { images: 0 }).populate({
+      path: 'user',
+    });
     return res.status(200).json(cases);
   }
 
   // Fetch all cases
   if (adminId) {
-    const cases = await Case.find({}, { images: 0 });
+    const cases = await Case.find({}, { images: 0 }).populate({
+      path: 'user',
+    });
     return res.status(200).json(cases);
   }
 
@@ -28,7 +32,9 @@ const getCases = async (req, res) => {
       const cases = await Case.find(
         { 'departments.police.assign': true },
         { images: 0 }
-      );
+      ).populate({
+        path: 'user',
+      });
       return res.status(200).json(cases);
     }
     // For Hospital
@@ -36,7 +42,9 @@ const getCases = async (req, res) => {
       const cases = await Case.find(
         { 'departments.hospital.assign': true },
         { images: 0 }
-      );
+      ).populate({
+        path: 'user',
+      });
       return res.status(200).json(cases);
     }
     // For Fire Brigade
@@ -44,7 +52,9 @@ const getCases = async (req, res) => {
       const cases = await Case.find(
         { 'departments.fireBrigade.assign': true },
         { images: 0 }
-      );
+      ).populate({
+        path: 'user',
+      });
       return res.status(200).json(cases);
     }
     // For DMC
@@ -52,7 +62,9 @@ const getCases = async (req, res) => {
       const cases = await Case.find(
         { 'departments.dmc.assign': true },
         { images: 0 }
-      );
+      ).populate({
+        path: 'user',
+      });
       return res.status(200).json(cases);
     }
     // For MWCA
@@ -60,7 +72,9 @@ const getCases = async (req, res) => {
       const cases = await Case.find(
         { 'departments.mwca.assign': true },
         { images: 0 }
-      );
+      ).populate({
+        path: 'user',
+      });
       return res.status(200).json(cases);
     }
   }
@@ -78,7 +92,9 @@ const getCases = async (req, res) => {
         ],
       },
       { images: 0 }
-    );
+    ).populate({
+      path: 'user',
+    });
     return res.status(200).json(cases);
   }
 };
@@ -94,7 +110,9 @@ const getCase = async (req, res) => {
   }
 
   // Fetch and check if the case exists or not
-  const cases = await Case.findById(id);
+  const cases = await Case.findById(id).populate({
+    path: 'user',
+  });
   if (!cases) {
     return res.status(404).json({ error: 'No such case!' });
   }
