@@ -1,0 +1,43 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-file mr-3"></i>Cases</h4>
+        </div>
+    </div>
+
+    <div class="case-table">
+        <!-- Case table -->
+        <table class="table table-bordered table-hover">
+            <caption>List of cases</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date/Time</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Situation</th>
+                    <th scope="col">Location</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let case of cases">
+                    <td>{{ case.dateTime | utcToLocal }}</td>
+                    <td>{{ case.user.firstName }} {{ case.user.lastName }}</td>
+                    <td><span class="status" [ngClass]="{
+                        'new-case': case.status === 'New',
+                        'assigned-case': case.status === 'Assigned',
+                        'partially-assign-case': case.status === 'Partially Assigned',
+                        'resolved-case': case.status === 'Resolved',
+                        'cancelled-case': case.status === 'Cancelled'
+                     }">{{ case.status }}</span></td>
+                    <td>{{ case.situation }}</td>
+                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ case.location }}"
+                            target="_blank">View</a></td>
+                    <td><button type="button" class="btn btn-manage" name="btn-manage-case"
+                            routerLink="/manage-case/{{ case._id }}">Manage</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

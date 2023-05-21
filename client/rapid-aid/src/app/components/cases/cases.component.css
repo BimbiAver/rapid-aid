@@ -1,0 +1,43 @@
+.case-table {
+  margin-top: 50px;
+}
+
+.btn-manage {
+  background-color: #03045e;
+  color: #fff;
+  font-size: 14px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.status {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.new-case {
+  background-color: #e01e37;
+  color: #fff;
+}
+
+.assigned-case {
+  background-color: #ffeb3b;
+  color: #000;
+}
+
+.partially-assign-case {
+  background-color: #ffeb3b;
+  color: #000;
+}
+
+.resolved-case {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.cancelled-case {
+  background-color: #000;
+  color: #fff;
+}

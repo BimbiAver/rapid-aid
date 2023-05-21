@@ -24,6 +24,8 @@ import { EditAdminComponent } from './components/edit-admin/edit-admin.component
 import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { CasesComponent } from './components/cases/cases.component';
+import { UtcToLocalPipe } from './helpers/utc-to-local.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     EditAdminComponent,
     CreateAdminComponent,
     UsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    CasesComponent,
+    UtcToLocalPipe
   ],
   imports: [
     BrowserModule,

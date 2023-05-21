@@ -17,6 +17,7 @@ import { EditAdminComponent } from './components/edit-admin/edit-admin.component
 import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { CasesComponent } from './components/cases/cases.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard | RapidAid - Keep calm and trust us' },
       { path: 'profile', component: ProfileComponent, title: 'Profile | RapidAid - Keep calm and trust us' },
+      { path: 'cases', component: CasesComponent, title: 'Cases | RapidAid - Keep calm and trust us' },
       { path: 'users', component: UsersComponent, title: 'Manage Users | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'user-details/:id', component: UserDetailsComponent, title: 'User Details | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'admins', component: AdminsComponent, title: 'Manage Admins | RapidAid - Keep calm and trust us', data: { role: 'Super Admin' } },
