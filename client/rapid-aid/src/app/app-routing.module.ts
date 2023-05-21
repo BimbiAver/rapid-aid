@@ -13,6 +13,8 @@ import { StationsComponent } from './components/stations/stations.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { EditStationComponent } from './components/edit-station/edit-station.component';
 import { AddStationComponent } from './components/add-station/add-station.component';
+import { EditAdminComponent } from './components/edit-admin/edit-admin.component';
+import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard | RapidAid - Keep calm and trust us' },
       { path: 'profile', component: ProfileComponent, title: 'Profile | RapidAid - Keep calm and trust us' },
       { path: 'admins', component: AdminsComponent, title: 'Manage Admins | RapidAid - Keep calm and trust us', data: { role: 'Super Admin' } },
+      { path: 'create-admin', component: CreateAdminComponent, title: 'Create Admin | RapidAid - Keep calm and trust us', data: { role: 'Super Admin' } },
+      { path: 'edit-admin/:id', component: EditAdminComponent, title: 'Edit Admin | RapidAid - Keep calm and trust us', data: { role: 'Super Admin' } },
       { path: 'departments', component: DepartmentsComponent, title: 'Manage Departments | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'edit-department/:id', component: EditDepartmentComponent, title: 'Edit Department | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'stations', component: StationsComponent, title: 'Manage Stations | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin', 'Department'] } },

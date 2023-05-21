@@ -20,6 +20,8 @@ import { StationsComponent } from './components/stations/stations.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { EditStationComponent } from './components/edit-station/edit-station.component';
 import { AddStationComponent } from './components/add-station/add-station.component';
+import { EditAdminComponent } from './components/edit-admin/edit-admin.component';
+import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { AddStationComponent } from './components/add-station/add-station.compon
     StationsComponent,
     EditDepartmentComponent,
     EditStationComponent,
-    AddStationComponent
+    AddStationComponent,
+    EditAdminComponent,
+    CreateAdminComponent
   ],
   imports: [
     BrowserModule,

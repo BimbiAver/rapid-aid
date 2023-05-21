@@ -1,0 +1,11 @@
+.btn-save {
+  margin-top: 20px;
+  background-color: #03045e;
+  border-color: #03045e;
+  color: #fff;
+}
+
+.btn-delete {
+  background-color: #e01e37;
+  color: #fff;
+}

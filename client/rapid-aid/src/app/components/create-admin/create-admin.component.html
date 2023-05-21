@@ -1,0 +1,48 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-plus mr-3"></i>Create Admin</h4>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12col-sm-12">
+            <!-- Admin details form -->
+            <form [formGroup]="adminForm" (ngSubmit)="createAdmin()" ngNativeValidate>
+                <div class="form-row">
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="nicNo">NIC No.</label>
+                        <input type="text" class="form-control" id="nicNo" formControlName="nicNo" required>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" required>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="contactNo">Contact No.</label>
+                        <input type="text" class="form-control" id="contactNo" formControlName="contactNo" required>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="userType">User Type</label>
+                        <select class="form-control" id="userType" formControlName="userType" required>
+                            <option value="" selected disabled>- Select -</option>
+                            <option value="Super Admin">Super Admin</option>
+                            <option value="Local Admin">Local Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" formControlName="username" required>
+                    </div>
+                    <div class="form-group col-md-6 col-lg-4">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" formControlName="password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-add" name="btn-add">Create admin</button>
+            </form>
+        </div>
+    </div>
+
+</div>

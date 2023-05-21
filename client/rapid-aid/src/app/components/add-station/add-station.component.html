@@ -8,7 +8,7 @@
 
     <div class="row mt-5">
         <div class="col-md-12col-sm-12">
-            <!-- Profile details form -->
+            <!-- Station details form -->
             <form [formGroup]="stationForm" (ngSubmit)="addStation()" ngNativeValidate>
                 <div class="form-row">
                     <div class="form-group col-md-6 col-lg-4">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group col-md-6 col-lg-4">
                         <label for="department">Department</label>
-                        <select class="form-control" id="department" formControlName="department">
+                        <select class="form-control" id="department" formControlName="department" required>
                             <option value="" selected disabled>- Select -</option>
                             <option value="64328bf98d91b84859621c72">Department of Police</option>
                             <option value="64285ad39b11209b8fb57da9">Ministry Of Health</option>
@@ -48,11 +48,7 @@
                     </div>
                     <div class="form-group col-md-6 col-lg-4">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" formControlName="password"
-                            aria-describedby="passwordHelpBlock" required>
-                        <small id="passwordHelpBlock" class="form-text text-muted">
-                            Please enter the existing password or new password to save changes.
-                        </small>
+                        <input type="password" class="form-control" id="password" formControlName="password" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-add" name="btn-add">Add station</button>

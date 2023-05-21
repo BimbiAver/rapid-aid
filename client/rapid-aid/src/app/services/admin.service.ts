@@ -32,6 +32,30 @@ export class AdminService {
     );
   }
 
+  // Add admin
+  addAdmin(data: Admin): Observable<any> {
+    let api = `${ADMIN_API}`;
+    return this.http
+      .post(api, data)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Update admin
+  updateAdmin(adminId: any, data: any): Observable<any> {
+    let api = `${ADMIN_API}/${adminId}`;
+    return this.http
+      .patch(api, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Delete admin
+  deleteAdmin(adminId: any): Observable<any> {
+    let api = `${ADMIN_API}/${adminId}`;
+    return this.http
+      .delete(api, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   handleError(error: HttpErrorResponse) {
     let msg = '';
