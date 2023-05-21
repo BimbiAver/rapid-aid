@@ -2,18 +2,14 @@
     <!-- Heading -->
     <div class="row heading justify-content-around">
         <div class="col-auto mr-auto">
-            <h4 class="section-title"><i class="fa-solid fa-edit mr-3"></i>Edit Station</h4>
-        </div>
-        <div class="col-auto">
-            <button type="button" class="btn btn-delete" name="btn-delete-station"
-                (click)="deleteStation(stationId)">Delete</button>
+            <h4 class="section-title"><i class="fa-solid fa-add mr-3"></i>Add Station</h4>
         </div>
     </div>
 
     <div class="row mt-5">
         <div class="col-md-12col-sm-12">
             <!-- Profile details form -->
-            <form [formGroup]="stationForm" (ngSubmit)="updateStation()" ngNativeValidate>
+            <form [formGroup]="stationForm" (ngSubmit)="addStation()" ngNativeValidate>
                 <div class="form-row">
                     <div class="form-group col-md-6 col-lg-4">
                         <label for="name">Name</label>
@@ -22,7 +18,7 @@
                     <div class="form-group col-md-6 col-lg-4">
                         <label for="department">Department</label>
                         <select class="form-control" id="department" formControlName="department">
-                            <option selected disabled>- Select -</option>
+                            <option value="" selected disabled>- Select -</option>
                             <option value="64328bf98d91b84859621c72">Department of Police</option>
                             <option value="64285ad39b11209b8fb57da9">Ministry Of Health</option>
                             <option value="6469b13a26bb715aeb746658">Fire Service Department</option>
@@ -59,7 +55,7 @@
                         </small>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-save" name="btn-save">Save changes</button>
+                <button type="submit" class="btn btn-add" name="btn-add">Add station</button>
             </form>
         </div>
     </div>

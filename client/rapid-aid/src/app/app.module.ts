@@ -19,6 +19,7 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { StationsComponent } from './components/stations/stations.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { EditStationComponent } from './components/edit-station/edit-station.component';
+import { AddStationComponent } from './components/add-station/add-station.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditStationComponent } from './components/edit-station/edit-station.com
     DepartmentsComponent,
     StationsComponent,
     EditDepartmentComponent,
-    EditStationComponent
+    EditStationComponent,
+    AddStationComponent
   ],
   imports: [
     BrowserModule,

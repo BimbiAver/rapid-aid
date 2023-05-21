@@ -12,6 +12,7 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { StationsComponent } from './components/stations/stations.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
 import { EditStationComponent } from './components/edit-station/edit-station.component';
+import { AddStationComponent } from './components/add-station/add-station.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'departments', component: DepartmentsComponent, title: 'Manage Departments | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'edit-department/:id', component: EditDepartmentComponent, title: 'Edit Department | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'stations', component: StationsComponent, title: 'Manage Stations | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin', 'Department'] } },
+      { path: 'add-station', component: AddStationComponent, title: 'Add Station | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: 'edit-station/:id', component: EditStationComponent, title: 'Edit Station | RapidAid - Keep calm and trust us', data: { role: ['Super Admin', 'Local Admin'] } },
       { path: '', redirectTo: "dashboard", pathMatch: "full" }
     ],

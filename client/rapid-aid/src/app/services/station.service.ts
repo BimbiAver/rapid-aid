@@ -32,11 +32,27 @@ export class StationService {
     );
   }
 
+  // Add station
+  addStation(data: Station): Observable<any> {
+    let api = `${STATION_API}`;
+    return this.http
+      .post(api, data)
+      .pipe(catchError(this.handleError));
+  }
+
   // Update station
   updateStation(stationId: any, data: any): Observable<any> {
     let api = `${STATION_API}/${stationId}`;
     return this.http
       .patch(api, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Delete station
+  deleteStation(stationId: any): Observable<any> {
+    let api = `${STATION_API}/${stationId}`;
+    return this.http
+      .delete(api, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

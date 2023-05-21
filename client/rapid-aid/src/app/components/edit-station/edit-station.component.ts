@@ -52,4 +52,14 @@ export class EditStationComponent {
         alert('Operation unsuccessful, please try again!')
       });
   }
+
+  // Delete station
+  deleteStation(stationId: any) {
+    if (window.confirm('Are you sure you want to delete this?')) {
+      this.stationService.deleteStation(stationId).subscribe((res) => {
+        alert('Station deleted successfully!');
+        this.ngZone.run(() => this.router.navigateByUrl('stations'))
+      })
+    }
+  }
 }
