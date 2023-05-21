@@ -22,6 +22,8 @@ import { EditStationComponent } from './components/edit-station/edit-station.com
 import { AddStationComponent } from './components/add-station/add-station.component';
 import { EditAdminComponent } from './components/edit-admin/edit-admin.component';
 import { CreateAdminComponent } from './components/create-admin/create-admin.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { CreateAdminComponent } from './components/create-admin/create-admin.com
     EditStationComponent,
     AddStationComponent,
     EditAdminComponent,
-    CreateAdminComponent
+    CreateAdminComponent,
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

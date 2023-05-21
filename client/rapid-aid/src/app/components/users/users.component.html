@@ -1,0 +1,39 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4 class="section-title"><i class="fa-solid fa-user mr-3"></i>Manage Users</h4>
+        </div>
+    </div>
+
+    <div class="user-table">
+        <!-- User table -->
+        <table class="table table-bordered table-hover">
+            <caption>List of users</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">NIC</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Mobile No.</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.nicNo }}</td>
+                    <td>{{ user.firstName }} {{ user.lastName }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.mobileNo }}</td>
+                    <td>{{ user.emailAddress }}</td>
+                    <td><button type="button" class="btn btn-view" name="btn-view-user"
+                            routerLink="/user-details/{{ user._id }}">View</button></td>
+                    <td><button type="button" class="btn btn-edit" name="btn-edit-user"
+                            routerLink="/edit-user/{{ user._id }}">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
