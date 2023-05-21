@@ -1,0 +1,143 @@
+<div class="container d-flex flex-column min-vh-100 pt-5 pb-5">
+    <!-- Heading -->
+    <div class="row heading justify-content-around">
+        <div class="col-auto mr-auto">
+            <h4><i class="fa-solid fa-file mr-3"></i>Case Details</h4>
+        </div>
+        <div class="col-auto">
+            <form [formGroup]="caseStatusForm" (ngSubmit)="updateCaseStatus()" ngNativeValidate>
+                <select class="form-control d-inline" id="status" formControlName="status">
+                    <option selected disabled>- Select -</option>
+                    <option value="New">New</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="Partially Assigned">Partially Assigned</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <button type="submit" class="btn btn-update d-inline" name="btn-update-case">Update case</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Case Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-case">
+                <h5 class="section-title">Case Details</h5>
+                <div class="mt-4">
+                    <p class="attribute d-inline mr-4">Date/Time:</p>
+                    <p class="value d-inline">{{ case.dateTime | utcToLocal }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Status:</p>
+                    <p class="value d-inline">{{ case.status }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Situation:</p>
+                    <p class="value d-inline">{{ case.situation }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Details:</p>
+                    <p class="value d-inline">{{ case.details }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Location:</p>
+                    <p class="value d-inline"><a
+                            href="https://www.google.com/maps/search/?api=1&query={{ case.location }}"
+                            target="_blank">View</a></p>
+                </div>
+                <div class="mt-2" *ngFor="let img of case?.images">
+                    <img [src]="img | stringToBase64" alt="img" class="case-img">
+                </div>
+
+            </div>
+            <!-- User Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-user">
+                <h5 class="section-title">User Details</h5>
+                <div class="mt-4">
+                    <p class="attribute d-inline mr-4">NIC No:</p>
+                    <p class="value d-inline">{{ case?.user?.nicNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Name:</p>
+                    <p class="value d-inline">{{ case?.user?.firstName }} {{ case?.user?.lastName }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Gender:</p>
+                    <p class="value d-inline">{{ case?.user?.gender }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Date of Birth:</p>
+                    <p class="value d-inline">{{ case?.user?.dob }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Address:</p>
+                    <p class="value d-inline">{{ case?.user?.address }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Mobile No:</p>
+                    <p class="value d-inline">{{ case?.user?.mobileNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Email Address:</p>
+                    <p class="value d-inline">{{ case?.user?.emailAddress }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Blood Group:</p>
+                    <p class="value d-inline">{{ case?.user?.bloodGroup }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <!-- Guardian Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-guardian">
+                <h5 class="section-title">Guardian Details</h5>
+                <div class="mt-4">
+                    <p class="attribute d-inline mr-4">NIC No:</p>
+                    <p class="value d-inline">{{ case?.user?.guardian?.nicNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Full Name:</p>
+                    <p class="value d-inline">{{ case?.user?.guardian?.fullName }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Address:</p>
+                    <p class="value d-inline">{{ case?.user?.guardian?.address }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Contact No:</p>
+                    <p class="value d-inline">{{ case?.user?.guardian?.contactNo }}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="attribute d-inline mr-4">Relationship:</p>
+                    <p class="value d-inline">{{ case?.user?.guardian?.relationship }}</p>
+                </div>
+            </div>
+            <!-- Medical Details -->
+            <div class="col-sm shadow p-5 bg-white rounded col-medical" *ngIf="case?.user?.medicalDetails != ''">
+                <h5 class="section-title">Medical Details</h5>
+                <div class="medical-table">
+                    <!-- Medical table -->
+                    <table class="table table-bordered table-hover">
+                        <caption>List of medicals</caption>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Disease</th>
+                                <th scope="col">Since</th>
+                                <th scope="col">Under Treatments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medical of case?.user?.medicalDetails">
+                                <td>{{ medical.disease }}</td>
+                                <td>{{ medical.since.substring(0, medical.since.indexOf('T')) }}</td>
+                                <td>{{ medical.underTreatments }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

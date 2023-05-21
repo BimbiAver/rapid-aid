@@ -26,6 +26,8 @@ import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { CasesComponent } from './components/cases/cases.component';
 import { UtcToLocalPipe } from './helpers/utc-to-local.pipe';
+import { ManageCaseComponent } from './components/manage-case/manage-case.component';
+import { StringToBase64Pipe } from './helpers/string-to-base64.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { UtcToLocalPipe } from './helpers/utc-to-local.pipe';
     UsersComponent,
     UserDetailsComponent,
     CasesComponent,
-    UtcToLocalPipe
+    UtcToLocalPipe,
+    ManageCaseComponent,
+    StringToBase64Pipe
   ],
   imports: [
     BrowserModule,

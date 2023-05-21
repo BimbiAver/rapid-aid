@@ -1,0 +1,60 @@
+.btn-update {
+  background-color: #e01e37;
+  color: #fff;
+}
+
+.attribute {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 18px;
+}
+
+.section-title {
+  color: #03045e;
+  font-size: 21px;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+  .col-case {
+    margin-right: 20px;
+  }
+
+  .col-user {
+    margin-left: 20px;
+  }
+
+  .col-guardian {
+    margin-right: 20px;
+  }
+
+  .col-medical {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .col-user {
+    margin-top: 50px;
+  }
+
+  .col-medical {
+    margin-top: 50px;
+  }
+}
+
+.medical-table {
+  margin-top: 50px;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.case-img {
+  margin-top: 10px;
+  max-width: 400px;
+}

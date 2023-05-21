@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 const CASE_API = 'https://rapidaid.live/api/cases';
 
@@ -16,6 +16,25 @@ export class CaseService {
   // Get cases
   getCases() {
     return this.http.get(`${CASE_API}`);
+  }
+
+  // Get case data
+  getCase(caseId: any): Observable<any> {
+    let api = `${CASE_API}/${caseId}`;
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // Update case
+  updateCase(caseId: any, data: any): Observable<any> {
+    let api = `${CASE_API}/${caseId}`;
+    return this.http
+      .patch(api, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
   // Error handling
