@@ -6,7 +6,7 @@ const logger = require('../utils/logger');
 // Get all users
 const getUsers = async (req, res) => {
   // Fetch all users
-  const users = await User.find({}).sort({ createdAt: 1 });
+  const users = await User.find({}).sort({ firstName: 1 });
   return res.status(200).json(users);
 };
 
