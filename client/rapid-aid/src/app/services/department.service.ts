@@ -32,6 +32,14 @@ export class DepartmentService {
     );
   }
 
+  // Update department
+  updateDepartment(departId: any, data: any): Observable<any> {
+    let api = `${DEPARTMENT_API}/${departId}`;
+    return this.http
+      .patch(api, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   handleError(error: HttpErrorResponse) {
     let msg = '';
