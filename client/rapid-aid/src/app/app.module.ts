@@ -18,6 +18,7 @@ import { AdminsComponent } from './components/admins/admins.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { StationsComponent } from './components/stations/stations.component';
 import { EditDepartmentComponent } from './components/edit-department/edit-department.component';
+import { EditStationComponent } from './components/edit-station/edit-station.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EditDepartmentComponent } from './components/edit-department/edit-depar
     AdminsComponent,
     DepartmentsComponent,
     StationsComponent,
-    EditDepartmentComponent
+    EditDepartmentComponent,
+    EditStationComponent
   ],
   imports: [
     BrowserModule,

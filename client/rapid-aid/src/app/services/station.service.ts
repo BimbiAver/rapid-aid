@@ -32,6 +32,14 @@ export class StationService {
     );
   }
 
+  // Update station
+  updateStation(stationId: any, data: any): Observable<any> {
+    let api = `${STATION_API}/${stationId}`;
+    return this.http
+      .patch(api, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   handleError(error: HttpErrorResponse) {
     let msg = '';

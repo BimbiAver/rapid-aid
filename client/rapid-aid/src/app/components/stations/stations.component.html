@@ -37,7 +37,7 @@
                     <td>{{ station.contactNo }}</td>
                     <td *ngIf="this.jwtPayload.adminId">{{ station.username }}</td>
                     <td *ngIf="this.jwtPayload.adminId"><button type="button" class="btn btn-edit"
-                            name="btn-edit-station" routerLink="/edit-station">Edit</button></td>
+                            name="btn-edit-station" routerLink="/edit-station/{{ station._id }}">Edit</button></td>
                 </tr>
             </tbody>
         </table>
