@@ -11,11 +11,9 @@ const getCases = async (req, res) => {
 
   // Fetch cases for a specific user
   if (userId) {
-    const cases = await Case.find({ user: userId }, { images: 0 })
-      .sort({ updatedAt: -1 })
-      .populate({
-        path: 'user',
-      });
+    const cases = await Case.find({ user: userId }, { images: 0 }).sort({
+      updatedAt: -1,
+    });
     return res.status(200).json(cases);
   }
 
