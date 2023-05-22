@@ -25,8 +25,8 @@ The system consists of a mobile application for public users, a web-based system
 <br>
 
 ## Technologies
-  - `Front-End`: Angular, HTML, CSS, JS & TS, Bootstrap, Font Awesome
-  - `Back-End`: NodeJs, JS, Express, MongoDB, Mongoose, Nodemon, Dotenv, CORS, JSON, JWT, Morgan, bcryptjs, body-parser, SendGrid, otp-generator, Twilio, http, Flutter Secure Storage, Geo Locator, Image Picker, Flutter Launcher Icons, etc..
+  - `Front-End`: Flutter, Dart, Angular, HTML, CSS, JS & TS, Bootstrap, Font Awesome
+  - `Back-End`: NodeJs, JS, TS, Express, Dart, MongoDB, Mongoose, Nodemon, Dotenv, CORS, JSON, JWT, Morgan, bcryptjs, body-parser, SendGrid, otp-generator, Twilio, http, Flutter Secure Storage, Geo Locator, Image Picker, Flutter Launcher Icons, etc..
   
 `Express` used as the middleware to create CRUD endpoints<br/>
 `Mongoose` used for managing data in MongoDB using queries<br/>
