@@ -12,6 +12,10 @@ The system consists of a mobile application for public users, a web-based system
 
 <h1 align="center"></h1>
 
+<img src="public/screenshots/welcome.png" width="30%"/> &nbsp; <img src="public/screenshots/dashboard-mobile.png" width="30%"/> &nbsp; <img src="public/screenshots/report-case-1.png" width="30%"/>
+
+<h1 align="center"></h1>
+
 <img src="public/screenshots/login.png" width="45%"/> &nbsp; <img src="public/screenshots/dashboard.png" width="45%"/>
 <br><br>
 <img src="public/screenshots/cases.png" width="45%"/> &nbsp; <img src="public/screenshots/view-case.png" width="45%"/>
